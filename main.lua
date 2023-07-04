@@ -6,6 +6,8 @@ Speed = 10
 Counter = 0
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+-- tick = require 'tick'
+-- print(tick)
 
 function collide(Player, Wall)
     if Player.x + Player.width >= Wall.x 
@@ -84,7 +86,7 @@ function love.load()
     }
     backgroundScaleX = SCREEN_WIDTH / backLayer1:getWidth()
     backgroundScaleY = SCREEN_HEIGHT / backLayer1:getHeight()
-    tick = require 'tick'
+    
     game = false
     game_over = false
     Player.image = love.graphics.newImage("mouse.png")
@@ -93,7 +95,7 @@ function love.load()
 end
 
 function love.update(dt)
-    tick.update(dt)
+    -- tick.update(dt)
     if not game or game_over then return end
     move_ball(dt)
     for index, value in ipairs(walls) do
@@ -145,7 +147,6 @@ function love.draw()
     end
     love.graphics.draw(Player.image, Player.x, Player.y,
                        0, Player.scaleX, Player.scaleY)
-    love.graphics.print(Counter, 100, 100, 0, 3, 3)
     love.graphics.setColor(1, 0.78, 0.15)
     for index, value in ipairs(walls) do
         local top = value.top
@@ -157,4 +158,5 @@ function love.draw()
     if game_over then
         love.graphics.print('GAME OVER', 400, 300, 0, 5, 5)
     end
+    love.graphics.print(Counter, 100, 100, 0, 3, 3)
 end
